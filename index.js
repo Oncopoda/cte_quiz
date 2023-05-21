@@ -10,6 +10,12 @@ app.get('/', (req, res) => {
     res.send('👋🏿🌍');
 });
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.get('/questions', async (req, res) => {
     try {
         const allQuestions = await pool.query("SELECT * FROM questions");
